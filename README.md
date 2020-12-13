@@ -1,6 +1,12 @@
-# New Project
+# Crossy Road
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+
+
+Personal learning side project to play with WebGL building the "Crossy Road" game.
+- ✨ Bootstrapped with Create Snowpack App (CSA).
+- Use WebGL via ThreeJS
 
 ## Available Scripts
 
@@ -19,6 +25,6 @@ Your app is ready to be deployed!
 
 **For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
 
-### Q: What about Eject?
+### npm run lint
 
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+Run with auto-fix Prettier and StandardJS.

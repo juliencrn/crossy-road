@@ -1,4 +1,8 @@
 {
+  "name": "crossy-road",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
@@ -6,11 +10,11 @@
     "lint": "prettier --write \"src/**/*.js\" && standard \"src/**/*.js\" --fix"
   },
   "dependencies": {
-    "standard": "^16.0.3",
     "three": "^0.123.0"
   },
   "devDependencies": {
     "prettier": "^2.0.5",
-    "snowpack": "^2.18.3"
+    "snowpack": "^2.18.3",
+    "standard": "^16.0.3"
   }
 }
