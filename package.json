@@ -6,8 +6,8 @@
     "lint": "prettier --write \"src/**/*.js\" && standard \"src/**/*.js\" --fix"
   },
   "dependencies": {
-    "canvas-confetti": "^1.2.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "three": "^0.123.0"
   },
   "devDependencies": {
     "prettier": "^2.0.5",

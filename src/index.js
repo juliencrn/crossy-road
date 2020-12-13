@@ -1,11 +1,41 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+import * as THREE from 'three'
 
-import confetti from 'canvas-confetti'
+export function helloThreeJS (elementId) {
+  // Create the scene
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  )
+  const renderer = new THREE.WebGLRenderer()
+  renderer.setSize(window.innerWidth, window.innerHeight)
 
-confetti.create(document.getElementById('canvas'), {
-  resize: true,
-  useWorker: true
-})({ particleCount: 200, spread: 200 })
+  // Create the mesh
+  const geometry = new THREE.BoxGeometry()
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+  const cube = new THREE.Mesh(geometry, material)
+
+  scene.add(cube)
+
+  camera.position.z = 5
+
+  // Animate
+  function animate () {
+    window.requestAnimationFrame(animate)
+
+    cube.rotation.x += 0.01
+    cube.rotation.y += 0.01
+
+    renderer.render(scene, camera)
+  }
+
+  animate()
+
+  // Mount the canvas element in the DOM
+  const rootElement = document.getElementById(elementId)
+  rootElement.appendChild(renderer.domElement)
+}
+
+helloThreeJS('app')
