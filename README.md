@@ -1,7 +1,9 @@
+![](./screenshot.jpeg)
+
 # Crossy Road
 
-[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/14fbd5a8-8583-40c1-85c0-9f9377575caa/deploy-status)](https://app.netlify.com/sites/crossy-road/deploys)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 Personal learning side project to play with WebGL building the "Crossy Road" game.
@@ -10,7 +12,7 @@ Personal learning side project to play with WebGL building the "Crossy Road" gam
 
 ## Available Scripts
 
-### npm start
+### `npm start`
 
 Runs the app in the development mode.
 Open http://localhost:8080 to view it in the browser.
@@ -18,13 +20,13 @@ Open http://localhost:8080 to view it in the browser.
 The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### npm run build
+### `npm run build`
 
 Builds a static copy of your site to the `build/` folder.
 Your app is ready to be deployed!
 
 **For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
 
-### npm run lint
+### `npm run lint`
 
 Run with auto-fix Prettier and StandardJS.
