@@ -1,34 +1,56 @@
 import * as THREE from 'three'
 
+import { createCubes, createLine } from './shapes'
+
 export function helloThreeJS (elementId) {
   // Create the scene
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
-    75,
+    5, // FOV
     window.innerWidth / window.innerHeight,
-    0.1,
-    1000
+    1, // Near
+    1000 // Far
   )
   const renderer = new THREE.WebGLRenderer()
   renderer.setSize(window.innerWidth, window.innerHeight)
 
-  // Create the mesh
-  const geometry = new THREE.BoxGeometry()
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-  const cube = new THREE.Mesh(geometry, material)
+  const line = createLine()
 
-  scene.add(cube)
+  const geometry = new THREE.BoxGeometry(1, 1, 1)
 
-  camera.position.z = 5
+  const createCube = createCubes(scene)
+  const cubes = [
+    createCube(geometry, 0x44aa88, 0),
+    createCube(geometry, 0x8844aa, -2),
+    createCube(geometry, 0xaa8844, 2)
+  ]
+
+  scene.add(line)
+
+  const color = 0xFFFFFF
+  const intensity = 1
+  const light = new THREE.DirectionalLight(color, intensity)
+  light.position.set(-1, 2, 4)
+  scene.add(light)
+
+  camera.position.z = 2
+  camera.position.set(0, 0, 100)
+  camera.lookAt(0, 0, 0)
 
   // Animate
-  function animate () {
-    window.requestAnimationFrame(animate)
+  function animate (time) {
+    time *= 0.001 // convertir le temps en secondes
 
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
+    cubes.forEach((cube, ndx) => {
+      const speed = 1 + ndx * 0.1
+      const rot = time * speed
+      cube.rotation.x = rot
+      cube.rotation.y = rot
+    })
 
     renderer.render(scene, camera)
+
+    window.requestAnimationFrame(animate)
   }
 
   animate()
