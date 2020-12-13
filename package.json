@@ -7,13 +7,12 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
-    "lint": "prettier --write \"src/**/*.js\" && standard \"src/**/*.js\" --fix"
+    "lint": "standard \"src/**/*.js\" --fix"
   },
   "dependencies": {
     "three": "^0.123.0"
   },
   "devDependencies": {
-    "prettier": "^2.0.5",
     "snowpack": "^2.18.3",
     "standard": "^16.0.3"
   }
