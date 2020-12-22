@@ -1,44 +1,62 @@
-import * as THREE from 'three'
+import SceneManager from './SceneManager'
 
-import { createCubes } from './shapes'
-import { setLight } from './setup'
-import { colors, getRandomBetween, CASE } from './utils'
+const canvas = document.getElementById('canvas')
 
-function main () {
-  // Setup the scene
-  const scene = new THREE.Scene()
-  scene.background = new THREE.Color(colors.background)
+const sceneManager = new SceneManager(canvas)
 
-  setLight(scene)
+bindEventListeners()
+render()
 
-  // create cubes
-  const createCube = createCubes(scene)
+function bindEventListeners () {
+  resizeCanvas()
 
-  for (let i = 0; i < 19; i++) {
-    createCube(450, 0, 450 - i * CASE)
-    createCube(-500, 0, 450 - i * CASE)
-    createCube(getRandomBetween(), 0, getRandomBetween())
-  }
-
-  // Grid
-  const gridHelper = new THREE.GridHelper(1000, 20, colors.yellow, colors.yellow)
-  scene.add(gridHelper)
-
-  // Camera
-  const ratio = window.innerWidth / window.innerHeight
-  const camera = new THREE.PerspectiveCamera(45, ratio, 1, 10000)
-  camera.position.set(400, 800, 1200)
-  camera.lookAt(0, 0, 0)
-
-  // Renderer
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
-  renderer.setPixelRatio(window.devicePixelRatio)
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.render(scene, camera)
-
-  // Mount the canvas element in the DOM
-  const rootElement = document.getElementById('app')
-  rootElement.appendChild(renderer.domElement)
+  window.addEventListener('keydown', onKeydown)
+  window.addEventListener('resize', resizeCanvas)
 }
 
-main()
+function resizeCanvas () {
+  canvas.style.width = '100%'
+  canvas.style.height = '100%'
+
+  canvas.width = canvas.offsetWidth
+  canvas.height = canvas.offsetHeight
+
+  sceneManager.onWindowResize()
+}
+
+function onKeydown (event) {
+  const arrows = {
+    left: 37,
+    top: 38,
+    right: 39,
+    bottom: 40
+  }
+
+  switch (Number(event.keyCode)) {
+    case arrows.left:
+      console.log('To left')
+      sceneManager.moveTo('left')
+      break
+    case arrows.top:
+      console.log('To top')
+      sceneManager.moveTo('top')
+      break
+    case arrows.right:
+      console.log('To right')
+      sceneManager.moveTo('right')
+      break
+    case arrows.bottom:
+      console.log('To bottom')
+      sceneManager.moveTo('bottom')
+      break
+
+    default:
+
+      break
+  }
+}
+
+function render () {
+  window.requestAnimationFrame(render)
+  sceneManager.update()
+}
