@@ -26,34 +26,13 @@ function resizeCanvas () {
 
 function onKeydown (event) {
   const arrows = {
-    left: 37,
-    top: 38,
-    right: 39,
-    bottom: 40
+    37: 'left',
+    38: 'top',
+    39: 'right',
+    40: 'bottom'
   }
 
-  switch (Number(event.keyCode)) {
-    case arrows.left:
-      console.log('To left')
-      sceneManager.moveTo('left')
-      break
-    case arrows.top:
-      console.log('To top')
-      sceneManager.moveTo('top')
-      break
-    case arrows.right:
-      console.log('To right')
-      sceneManager.moveTo('right')
-      break
-    case arrows.bottom:
-      console.log('To bottom')
-      sceneManager.moveTo('bottom')
-      break
-
-    default:
-
-      break
-  }
+  sceneManager.moveTo(arrows[event.keyCode] || undefined)
 }
 
 function render () {
