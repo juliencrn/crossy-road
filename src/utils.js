@@ -11,7 +11,7 @@ export const colors = {
   yellow: 0xf1fa8c
 }
 
-export function getRandomBetween (min = -500, max = 450) {
+export function getRandomBetween (min, max) {
   return (Math.random() * (max - min + 1)) + min
 }
 

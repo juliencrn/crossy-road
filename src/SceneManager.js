@@ -19,8 +19,6 @@ class SceneManager {
     this.renderer = this.buildRenderer(this.screenDimensions)
     this.camera = this.buildCamera(this.screenDimensions)
     this.sceneObjects = this.createSceneObjects(this.scene)
-
-    console.log(this.sceneObjects)
   }
 
   buildScene () {
@@ -64,16 +62,17 @@ class SceneManager {
 
     // Make squares
     for (let i = 0; i < 20; i++) {
+      const y = 0
+      const z = 450 - i * CASE
+
       /* eslint-disable no-new */
-      sceneObjects.push(
-        new Square(scene, { x: 450, y: 0, z: 450 - i * CASE })
-      )
-      sceneObjects.push(
-        new Square(scene, { x: -500, y: 0, z: 450 - i * CASE })
-      )
-      sceneObjects.push(
-        new Square(scene, { x: getRandomBetween(), y: 0, z: getRandomBetween() })
-      )
+      sceneObjects.push(new Square(scene, { x: 450, y, z }))
+      sceneObjects.push(new Square(scene, { x: -500, y, z }))
+      sceneObjects.push(new Square(scene, {
+        x: getRandomBetween(-500, 450),
+        y,
+        z: getRandomBetween(-500, 450)
+      }))
       /* eslint-enable no-new */
     }
 
@@ -82,9 +81,9 @@ class SceneManager {
 
   update () {
     // This cause lag
-    for (let i = 0; i < this.sceneObjects.length; i++) {
-      // this.sceneObjects[i].update()
-    }
+    // for (let i = 0; i < this.sceneObjects.length; i++) {
+    //   this.sceneObjects[i].update()
+    // }
 
     this.renderer.render(this.scene, this.camera)
   }
@@ -101,26 +100,43 @@ class SceneManager {
     this.renderer.setSize(width, height)
   }
 
-  // TODO : Move this logic otherwhere
+  // TODO : Can I move this logic in the Player object ?
   moveTo (direction) {
     const player = this.scene.children.find(mesh => mesh.name === 'player')
 
+    // Defines movement
+    let { x, z } = player.position
     switch (direction) {
       case 'top':
-        player.position.z -= CASE
+        z -= CASE
         break
       case 'bottom':
-        player.position.z += CASE
+        z += CASE
         break
       case 'left':
-        player.position.x -= CASE
+        x -= CASE
         break
       case 'right':
-        player.position.x += CASE
+        x += CASE
         break
+    }
 
-      default:
-        break
+    // Check position of each cube and return a boolean
+    const matchPosition = (position) => {
+      return !!this.scene.children
+        .filter(mesh => mesh.name === 'cube')
+        .map(mesh => mesh.position)
+        .find(({ z, x }) => x === position.x && z === position.z)
+    }
+
+    // Move the player if the path is clear
+    if (!matchPosition({ x, z })) {
+      if (player.position.z !== z) {
+        player.position.z = z
+      }
+      if (player.position.x !== x) {
+        player.position.x = x
+      }
     }
   }
 }
